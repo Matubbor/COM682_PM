@@ -48,7 +48,10 @@ app.get("/api/health", (req, res) => {
 });
 
 // Upload photo route
-app.post("/api/trips", upload.single("photo"), async (req, res) => {
+app.post("/api/trips", upload.fields([
+  { name: "photo", maxCount: 1 },
+  { name: "file", maxCount: 1 }
+]), async (req, res) => {
   try {
     console.log("Upload request received");
     console.log("Body:", req.body);
