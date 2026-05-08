@@ -17,7 +17,10 @@ async function handleUpload(event) {
     message.className = 'form-message';
 
     const formData = new FormData();
-    formData.append('file', fileInput.files[0]);
+
+    // Backend expects the file field name to be "photo"
+    formData.append('photo', fileInput.files[0]);
+
     formData.append('placeName', document.getElementById('placeName').value);
     formData.append('city', document.getElementById('city').value);
     formData.append('country', document.getElementById('country').value);
@@ -25,6 +28,20 @@ async function handleUpload(event) {
     formData.append('review', document.getElementById('review').value);
     formData.append('rating', document.getElementById('rating').value);
     formData.append('userName', document.getElementById('userName').value);
+
+    // Extra fields required by backend
+    formData.append('title', document.getElementById('placeName').value);
+    formData.append('description', document.getElementById('review').value);
+    formData.append('tags', document.getElementById('category').value);
+    formData.append('privacy', 'Public');
+    formData.append('userEmail', 'guest@tripcloud.local');
+
+    // Backend requires title and description
+    formData.append('title', document.getElementById('placeName').value);
+    formData.append('description', document.getElementById('review').value);
+    formData.append('tags', document.getElementById('category').value);
+    formData.append('privacy', 'Public');
+    formData.append('userEmail', 'guest@tripcloud.local');
 
     try {
         await createTrip(formData);
