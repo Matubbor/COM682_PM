@@ -1,13 +1,17 @@
 // API functions for TripCloud
 
 // Get all trips
+// Get all trips
 async function getTrips() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/trips`);
         if (!response.ok) {
-            throw new Error('Failed to fetch trips');
+            const error = await response.json().catch(() => ({ message: "Failed to fetch trips" }));
+            throw new Error(error.message || error.error || "Failed to fetch trips");
         }
-        return await response.json();
+
+        const data = await response.json();
+        return data.trips || [];
     } catch (error) {
         console.error('Error fetching trips:', error);
         throw error;
@@ -15,13 +19,17 @@ async function getTrips() {
 }
 
 // Get a single trip by ID
+// Get a single trip by ID
 async function getTrip(id) {
     try {
         const response = await fetch(`${API_BASE_URL}/api/trips/${id}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch trip');
+            const error = await response.json().catch(() => ({ message: "Failed to fetch trip" }));
+            throw new Error(error.message || error.error || "Failed to fetch trip");
         }
-        return await response.json();
+
+        const data = await response.json();
+        return data.trip;
     } catch (error) {
         console.error('Error fetching trip:', error);
         throw error;
