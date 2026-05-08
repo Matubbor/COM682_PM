@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripCloud - Share Your Travel Treasures</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">🧭 TripCloud</h1>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="upload.html">Upload Trip</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Travel media for modern explorers</p>
+                <h2>Share Your Travel Treasures</h2>
+                <p>Upload photos and videos from world tours, destinations, food experiences, and unforgettable journeys.</p>
+                <div class="hero-actions">
+                    <a href="upload.html" class="btn btn-primary">Upload Trip</a>
+                    <a href="gallery.html" class="btn btn-secondary">Explore Gallery</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-trips page-section">
+            <div class="container">
+                <h2>Recent Trip Posts</h2>
+                <div id="recent-trips-container" class="trips-grid">
+                    <!-- Recent trips will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>TripCloud - Cloud-native travel media sharing platform</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

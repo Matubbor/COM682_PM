@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Travel Treasure - TripCloud</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">🧭 TripCloud</h1>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="upload.html">Upload Trip</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="edit-form-section page-section">
+            <div class="container page-container">
+                <form id="edit-form" class="form-card">
+                    <div class="form-heading">
+                        <p class="eyebrow">Update the log</p>
+                        <h2>Edit Travel Treasure</h2>
+                        <p>Refine the details for this saved travel memory.</p>
+                    </div>
+                    <input type="hidden" id="trip-id" name="id">
+                    <div class="form-group">
+                        <label for="edit-title">Trip Title</label>
+                        <input type="text" id="edit-title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-description">Description</label>
+                        <textarea id="edit-description" name="description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-location">Location</label>
+                        <input type="text" id="edit-location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-date">Trip Date</label>
+                        <input type="date" id="edit-date" name="date" required>
+                    </div>
+                    <button type="submit" class="submit-button btn btn-primary">Update Trip</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>TripCloud - Cloud-native travel media sharing platform</p>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/edit.js"></script>
+</body>
+</html>
