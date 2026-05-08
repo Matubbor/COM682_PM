@@ -56,6 +56,12 @@ app.post("/api/trips", upload.fields([
     console.log("Upload request received");
     console.log("Body:", req.body);
     console.log("File:", req.file);
+    const uploadedFile =
+      req.file ||
+      req.files?.photo?.[0] ||
+      req.files?.file?.[0];
+
+    req.file = uploadedFile;
 
     const { title, description, tags, privacy, userEmail } = req.body;
 
