@@ -1,56 +1,67 @@
 // Upload page script for TripCloud
 
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('uploadForm');
-    form.addEventListener('submit', handleUpload);
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("uploadForm");
+    form.addEventListener("submit", handleUpload);
 });
 
-// Handle form submission for uploading a new trip
 async function handleUpload(event) {
     event.preventDefault();
 
     const form = event.target;
-    const message = document.getElementById('uploadMessage');
-    const fileInput = document.getElementById('file');
+    const message = document.getElementById("uploadMessage");
+    const fileInput = document.getElementById("file");
 
-    message.textContent = '';
-    message.className = 'form-message';
+    message.textContent = "";
+    message.className = "form-message";
+
+    if (!fileInput.files || fileInput.files.length === 0) {
+        message.textContent = "Please choose a photo or video first.";
+        message.classList.add("error-message");
+        return;
+    }
+
+    const placeName = document.getElementById("placeName").value;
+    const city = document.getElementById("city").value;
+    const country = document.getElementById("country").value;
+    const category = document.getElementById("category").value;
+    const review = document.getElementById("review").value;
+    const rating = document.getElementById("rating").value;
+    const userName = document.getElementById("userName").value;
 
     const formData = new FormData();
 
-    // Backend expects the file field name to be "photo"
-    formData.append('photo', fileInput.files[0]);
+    // Backend server.js expects upload.single("photo")
+    formData.append("photo", fileInput.files[0]);
 
-    formData.append('placeName', document.getElementById('placeName').value);
-    formData.append('city', document.getElementById('city').value);
-    formData.append('country', document.getElementById('country').value);
-    formData.append('category', document.getElementById('category').value);
-    formData.append('review', document.getElementById('review').value);
-    formData.append('rating', document.getElementById('rating').value);
-    formData.append('userName', document.getElementById('userName').value);
+    // Frontend display fields
+    formData.append("placeName", placeName);
+    formData.append("city", city);
+    formData.append("country", country);
+    formData.append("category", category);
+    formData.append("review", review);
+    formData.append("rating", rating);
+    formData.append("userName", userName);
 
-    // Extra fields required by backend
-    formData.append('title', document.getElementById('placeName').value);
-    formData.append('description', document.getElementById('review').value);
-    formData.append('tags', document.getElementById('category').value);
-    formData.append('privacy', 'Public');
-    formData.append('userEmail', 'guest@tripcloud.local');
-
-    // Backend requires title and description
-    formData.append('title', document.getElementById('placeName').value);
-    formData.append('description', document.getElementById('review').value);
-    formData.append('tags', document.getElementById('category').value);
-    formData.append('privacy', 'Public');
-    formData.append('userEmail', 'guest@tripcloud.local');
+    // Backend required fields
+    formData.append("title", placeName);
+    formData.append("description", review);
+    formData.append("tags", category);
+    formData.append("privacy", "Public");
+    formData.append("userEmail", "guest@tripcloud.local");
 
     try {
         await createTrip(formData);
-        message.textContent = 'Trip post uploaded successfully!';
-        message.classList.add('success-message');
+        message.textContent = "Trip post uploaded successfully!";
+        message.classList.add("success-message");
         form.reset();
+
+        setTimeout(() => {
+            window.location.href = "gallery.html?v=" + Date.now();
+        }, 700);
     } catch (error) {
-        console.error('Upload error:', error);
-        message.textContent = error.message || 'Upload failed. Please try again.';
-        message.classList.add('error-message');
+        console.error("Upload error:", error);
+        message.textContent = error.message || "Upload failed. Please try again.";
+        message.classList.add("error-message");
     }
 }
